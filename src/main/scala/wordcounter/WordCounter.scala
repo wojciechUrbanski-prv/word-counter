@@ -10,8 +10,7 @@ import wordcounter.model.WordCount
 
 class WordCounter(eventProducer: EventProducer, config: EventHandlingConfig) {
   def countWords(): Stream[IO, Map[EventType, WordCount]] = {
-    eventProducer
-      .getEvent
+    eventProducer.getEvent
       .through(TimeStamped.reorderLocally(config.reorderingWindow))
       .through(accumulateDataOverTime)
       .collect {

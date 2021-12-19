@@ -7,7 +7,7 @@ import fs2.timeseries.TimeStamped
 
 class ListEventProducer(events: List[Event]) extends EventProducer {
   override def getEvent: Stream[IO, TimeStamped[Event]] = {
-      for {
+    for {
       event <- Stream(events: _*)
       timestampedEvent = TimeStamped(event.timestamp.toFiniteDuration, event)
     } yield timestampedEvent

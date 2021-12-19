@@ -17,8 +17,8 @@ class CoreService private (wordStore: WordStore, wordCounter: WordCounter) {
 object CoreService {
   def makeLive(store: WordStore): CoreService = {
     val eventProducer = new InfiniteRandomEventProducer
-    val config = EventHandlingConfig(2000.millis, 2000.millis)
-    val wordCounter = new WordCounter(eventProducer, config)
+    val config        = EventHandlingConfig(2000.millis, 2000.millis)
+    val wordCounter   = new WordCounter(eventProducer, config)
     new CoreService(store, wordCounter)
   }
 }

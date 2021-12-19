@@ -6,5 +6,5 @@ import eventproducer.model.Event
 import fs2.timeseries.TimeStamped
 
 trait EventProducer {
-  def getEvent : Stream[IO, TimeStamped[Event]]
+  def getEvent: Stream[IO, TimeStamped[Event]]
 }
