@@ -1,12 +1,13 @@
 package wordcounter
 
 import cats.effect.IO
-import io.circe.parser._
 import eventproducer.EventProducer
 import eventproducer.config.EventHandlingConfig
 import eventproducer.model.{Event, EventType}
+import io.circe.parser._
 import fs2._
 import fs2.timeseries.TimeStamped
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 import wordcounter.model.WordCount
 
 class WordCounter(eventProducer: EventProducer, config: EventHandlingConfig) {
@@ -22,12 +23,22 @@ class WordCounter(eventProducer: EventProducer, config: EventHandlingConfig) {
         case TimeStamped(_, Left(values)) if values.nonEmpty => values
       }
       .map(WordCounter.groupAndCountWords)
+      .evalTap(logCollectedDataInfo)
   }
 
   private def accumulateDataOverTime(input: Stream[IO, TimeStamped[Event]]) = {
     TimeStamped
       .withRate[Event, List[Event]](config.accumulationWindow)(List(_))
       .toPipe(input)
+  }
+
+  private def logCollectedDataInfo(collectedData: Map[EventType, WordCount]) = {
+    val logData = collectedData
+      .map { case (eventType, wordCount) =>
+        s"$eventType: $wordCount"
+      }
+      .mkString("\n", "\n", "")
+    Slf4jLogger.create[IO].flatMap(logger => logger.info(s"Collected: $logData"))
   }
 }
 
