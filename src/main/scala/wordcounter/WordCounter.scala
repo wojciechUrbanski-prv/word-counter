@@ -1,6 +1,7 @@
 package wordcounter
 
 import cats.effect.IO
+import io.circe.parser._
 import eventproducer.EventProducer
 import eventproducer.config.EventHandlingConfig
 import eventproducer.model.{Event, EventType}
@@ -11,6 +12,10 @@ import wordcounter.model.WordCount
 class WordCounter(eventProducer: EventProducer, config: EventHandlingConfig) {
   def countWords(): Stream[IO, Map[EventType, WordCount]] = {
     eventProducer.getEvent
+      .map(rawData => decode[Event](rawData.value))
+      .collect { case Right(event) =>
+        TimeStamped(event.timestamp.toFiniteDuration, event)
+      }
       .through(TimeStamped.reorderLocally(config.reorderingWindow))
       .through(accumulateDataOverTime)
       .collect {

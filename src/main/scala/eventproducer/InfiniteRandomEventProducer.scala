@@ -3,28 +3,29 @@ package eventproducer
 import cats.effect.std.Random
 import cats.effect.{Clock, IO}
 import cats.syntax.all._
-import eventproducer.model.{Data, Event, EventType, Timestamp}
+import eventproducer.model._
+import io.circe.syntax._
 import fs2._
-import fs2.timeseries.TimeStamped
 
 import scala.concurrent.duration.DurationInt
 
 class InfiniteRandomEventProducer extends EventProducer {
 
-  override def getEvent: Stream[IO, TimeStamped[Event]] = {
-    (for {
-      events <- Stream.eval(randomEvents())
-      event  <- Stream(events: _*).metered[IO](50.millis)
-      timestampedEvent = TimeStamped(event.timestamp.toFiniteDuration, event)
-    } yield timestampedEvent).repeat
+  override def getEvent: Stream[IO, RawData] = {
+    Stream.eval(randomEventOrGarbageData()).repeat.metered(50.millis)
   }
 
-  private def randomEvents(): IO[List[Event]] = {
+  private def randomEventOrGarbageData(): IO[RawData] = {
     for {
-      random         <- Random.scalaUtilRandom[IO]
-      numberOfEvents <- random.nextIntBounded(20)
-      events         <- (0 to numberOfEvents).map(_ => randomEvent(random)).toList.sequence
-    } yield events
+      random            <- Random.scalaUtilRandom[IO]
+      shouldBeEventData <- random.nextBoolean
+      data <-
+        if (shouldBeEventData) {
+          randomEvent(random).map(event => event.asJson.toString)
+        } else {
+          random.nextString(10)
+        }
+    } yield RawData(data)
   }
 
   private def randomEvent(random: Random[IO]) = {
