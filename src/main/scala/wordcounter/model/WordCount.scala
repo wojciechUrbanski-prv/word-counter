@@ -1,4 +1,4 @@
-package processor.model
+package wordcounter.model
 
 case class WordCount(value: Int) extends AnyVal {
   def add(count: Int): WordCount = WordCount(value + count)
