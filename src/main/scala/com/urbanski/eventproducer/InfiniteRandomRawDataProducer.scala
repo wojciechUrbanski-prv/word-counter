@@ -9,9 +9,9 @@ import fs2._
 
 import scala.concurrent.duration.DurationInt
 
-class InfiniteRandomEventProducer extends EventProducer {
+class InfiniteRandomRawDataProducer extends RawDataProducer {
 
-  override def getEvent: Stream[IO, RawData] = {
+  override def getRawData: Stream[IO, RawData] = {
     Stream.eval(randomEventOrGarbageData()).repeat.metered(50.millis)
   }
 

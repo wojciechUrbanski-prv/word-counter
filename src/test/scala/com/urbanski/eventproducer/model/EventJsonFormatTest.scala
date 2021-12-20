@@ -1,6 +1,5 @@
 package com.urbanski.eventproducer.model
 
-import io.circe.DecodingFailure
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.EitherValues._
 import io.circe.parser._

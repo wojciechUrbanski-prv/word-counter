@@ -3,7 +3,7 @@ package e2e
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
 import com.urbanski.CoreService
-import com.urbanski.eventproducer.ListEventProducer
+import com.urbanski.eventproducer.ListRawDataProducer
 import com.urbanski.eventproducer.model._
 import com.urbanski.http.GetWordsService
 import com.urbanski.store.MutableWordStore
@@ -28,8 +28,8 @@ class ConsumeDataAndExposeDataFlow extends AnyWordSpec with EitherValues {
         Event(EventType("eventType1"), Data("data"), Timestamp(1001L)).asJson.toString
       ).map(RawData)
       val store           = new MutableWordStore
-      val eventProducer   = new ListEventProducer(events)
-      val coreService     = CoreService.makeLive(store, eventProducer)
+      val rawDataProducer = new ListRawDataProducer(events)
+      val coreService     = CoreService.makeLive(store, rawDataProducer)
       val getWordsService = new GetWordsService(store)
 
       val response = (for {

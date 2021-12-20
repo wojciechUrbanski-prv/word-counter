@@ -1,7 +1,7 @@
 package com.urbanski
 
 import cats.effect.IO
-import com.urbanski.eventproducer.EventProducer
+import com.urbanski.eventproducer.RawDataProducer
 import com.urbanski.eventproducer.config.EventHandlingConfig
 import com.urbanski.store.WordStore
 import com.urbanski.wordcounter.WordCounter
@@ -15,8 +15,8 @@ class CoreService private (wordStore: WordStore, wordCounter: WordCounter) {
 }
 
 object CoreService {
-  def makeLive(store: WordStore, eventProducer: EventProducer, config: EventHandlingConfig = EventHandlingConfig.default): CoreService = {
-    val wordCounter = new WordCounter(eventProducer, config)
+  def makeLive(store: WordStore, rawDataProducer: RawDataProducer, config: EventHandlingConfig = EventHandlingConfig.default): CoreService = {
+    val wordCounter = new WordCounter(rawDataProducer, config)
     new CoreService(store, wordCounter)
   }
 }
