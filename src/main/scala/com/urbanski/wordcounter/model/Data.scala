@@ -1,7 +1,7 @@
-package com.urbanski.eventproducer.model
+package com.urbanski.wordcounter.model
 
-import io.circe.{Decoder, Encoder}
 import io.circe.generic.extras.semiauto.{deriveUnwrappedDecoder, deriveUnwrappedEncoder}
+import io.circe.{Decoder, Encoder}
 
 case class Data(value: String) extends AnyVal
 

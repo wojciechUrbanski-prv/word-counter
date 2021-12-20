@@ -1,7 +1,6 @@
 package com.urbanski.store
 import cats.effect.IO
-import com.urbanski.eventproducer.model.EventType
-import com.urbanski.wordcounter.model.WordCount
+import com.urbanski.wordcounter.model.{EventType, WordCount}
 
 import scala.collection.mutable
 

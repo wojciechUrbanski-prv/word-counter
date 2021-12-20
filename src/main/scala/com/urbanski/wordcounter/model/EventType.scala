@@ -1,7 +1,7 @@
-package com.urbanski.eventproducer.model
+package com.urbanski.wordcounter.model
 
-import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 import io.circe.generic.extras.semiauto.{deriveUnwrappedDecoder, deriveUnwrappedEncoder}
+import io.circe.{Decoder, Encoder, KeyEncoder}
 
 case class EventType(value: String) extends AnyVal
 

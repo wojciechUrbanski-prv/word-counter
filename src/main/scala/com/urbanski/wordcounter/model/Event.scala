@@ -1,4 +1,4 @@
-package com.urbanski.eventproducer.model
+package com.urbanski.wordcounter.model
 
 import io.circe.generic.extras.Configuration
 import io.circe.generic.extras.semiauto._

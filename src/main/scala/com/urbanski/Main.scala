@@ -1,7 +1,7 @@
 package com.urbanski
 
 import cats.effect.{ExitCode, IO, IOApp}
-import com.urbanski.eventproducer.InfiniteRandomRawDataProducer
+import com.urbanski.rawdataproducer.InfiniteRandomRawDataProducer
 import com.urbanski.http.GetWordsService
 import com.urbanski.store.RefWordStore
 import org.http4s.blaze.server.BlazeServerBuilder

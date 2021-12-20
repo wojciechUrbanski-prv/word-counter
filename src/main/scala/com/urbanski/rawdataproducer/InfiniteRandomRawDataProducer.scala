@@ -1,9 +1,10 @@
-package com.urbanski.eventproducer
+package com.urbanski.rawdataproducer
 
 import cats.effect.std.Random
 import cats.effect.{Clock, IO}
 import cats.syntax.all._
-import com.urbanski.eventproducer.model._
+import com.urbanski.rawdataproducer.model.RawData
+import com.urbanski.wordcounter.model.{Data, Event, EventType, Timestamp}
 import io.circe.syntax._
 import fs2._
 

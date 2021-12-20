@@ -1,13 +1,13 @@
 package com.urbanski.wordcounter
 
-import io.circe.syntax._
 import cats.effect.unsafe.implicits.global
-import com.urbanski.eventproducer.ListRawDataProducer
-import com.urbanski.eventproducer.config.EventHandlingConfig
-import com.urbanski.eventproducer.model.{Data, Event, EventType, RawData, Timestamp}
+import com.urbanski.rawdataproducer.ListRawDataProducer
+import com.urbanski.rawdataproducer.config.EventHandlingConfig
+import com.urbanski.rawdataproducer.model.RawData
+import com.urbanski.wordcounter.model._
+import io.circe.syntax._
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
-import com.urbanski.wordcounter.model.WordCount
 
 import scala.concurrent.duration.DurationInt
 

@@ -1,7 +1,7 @@
-package com.urbanski.eventproducer.model
+package com.urbanski.wordcounter.model
 
+import io.circe.generic.extras.semiauto.{deriveUnwrappedDecoder, deriveUnwrappedEncoder}
 import io.circe.{Decoder, Encoder}
-import io.circe.generic.extras.semiauto.{deriveUnwrappedEncoder, deriveUnwrappedDecoder}
 
 import java.util.concurrent.TimeUnit
 import scala.concurrent.duration.FiniteDuration

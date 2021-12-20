@@ -1,8 +1,7 @@
 package com.urbanski.store
 
 import cats.effect.{IO, Ref}
-import com.urbanski.eventproducer.model.EventType
-import com.urbanski.wordcounter.model.WordCount
+import com.urbanski.wordcounter.model.{EventType, WordCount}
 
 class RefWordStore private (wordStore: Ref[IO, Map[EventType, WordCount]]) extends WordStore {
   override def store(newWordCounts: Map[EventType, WordCount]): IO[Unit] = wordStore.set(newWordCounts)

@@ -1,14 +1,13 @@
 package com.urbanski.wordcounter
 
 import cats.effect.IO
-import com.urbanski.eventproducer.RawDataProducer
-import com.urbanski.eventproducer.config.EventHandlingConfig
-import com.urbanski.eventproducer.model.{Event, EventType}
+import com.urbanski.rawdataproducer.RawDataProducer
+import com.urbanski.rawdataproducer.config.EventHandlingConfig
 import io.circe.parser._
 import fs2._
 import fs2.timeseries.TimeStamped
 import org.typelevel.log4cats.slf4j.Slf4jLogger
-import com.urbanski.wordcounter.model.WordCount
+import com.urbanski.wordcounter.model.{Event, EventType, WordCount}
 
 class WordCounter(rawDataProducer: RawDataProducer, config: EventHandlingConfig) {
   def countWords(): Stream[IO, Map[EventType, WordCount]] = {

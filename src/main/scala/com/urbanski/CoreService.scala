@@ -1,8 +1,8 @@
 package com.urbanski
 
 import cats.effect.IO
-import com.urbanski.eventproducer.RawDataProducer
-import com.urbanski.eventproducer.config.EventHandlingConfig
+import com.urbanski.rawdataproducer.RawDataProducer
+import com.urbanski.rawdataproducer.config.EventHandlingConfig
 import com.urbanski.store.WordStore
 import com.urbanski.wordcounter.WordCounter
 

@@ -1,7 +1,7 @@
-package com.urbanski.eventproducer
+package com.urbanski.rawdataproducer
 
 import cats.effect.IO
-import com.urbanski.eventproducer.model.RawData
+import com.urbanski.rawdataproducer.model.RawData
 import fs2._
 
 trait RawDataProducer {

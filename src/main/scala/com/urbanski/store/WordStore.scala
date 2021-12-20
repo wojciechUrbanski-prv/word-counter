@@ -1,8 +1,7 @@
 package com.urbanski.store
 
 import cats.effect.IO
-import com.urbanski.eventproducer.model.EventType
-import com.urbanski.wordcounter.model.WordCount
+import com.urbanski.wordcounter.model.{EventType, WordCount}
 
 trait WordStore {
   def store(newWordCounts: Map[EventType, WordCount]): IO[Unit]

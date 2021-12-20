@@ -1,4 +1,4 @@
-package com.urbanski.eventproducer.config
+package com.urbanski.rawdataproducer.config
 
 import scala.concurrent.duration.{DurationInt, FiniteDuration}
 

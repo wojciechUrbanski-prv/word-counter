@@ -1,3 +1,3 @@
-package com.urbanski.eventproducer.model
+package com.urbanski.rawdataproducer.model
 
 case class RawData(value: String) extends AnyVal

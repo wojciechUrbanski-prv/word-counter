@@ -3,11 +3,11 @@ package e2e
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
 import com.urbanski.CoreService
-import com.urbanski.eventproducer.ListRawDataProducer
-import com.urbanski.eventproducer.model._
 import com.urbanski.http.GetWordsService
+import com.urbanski.rawdataproducer.ListRawDataProducer
+import com.urbanski.rawdataproducer.model.RawData
 import com.urbanski.store.MutableWordStore
-import com.urbanski.wordcounter.model.WordCount
+import com.urbanski.wordcounter.model._
 import io.circe.parser._
 import io.circe.syntax._
 import org.http4s._
