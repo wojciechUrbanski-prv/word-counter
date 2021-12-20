@@ -12,10 +12,12 @@ object Main extends IOApp {
     for {
       store <- RefWordStore.make
       rawDataProducer = new InfiniteRandomRawDataProducer
-      coreService   = CoreService.makeLive(store, rawDataProducer)
-      _ <- coreService.countAndStoreWords().compile.drain.start
+      coreService     = CoreService.makeLive(store, rawDataProducer)
+      coreServiceFiber <- coreService.countAndStoreWords().compile.drain.start
       getWordsService = new GetWordsService(store)
-      _ <- runHttpServer(getWordsService)
+      httpServerFiber <- runHttpServer(getWordsService).start
+      _               <- coreServiceFiber.join
+      _               <- httpServerFiber.join
     } yield ExitCode.Success
   }
 
