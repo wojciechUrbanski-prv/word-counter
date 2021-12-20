@@ -2,8 +2,8 @@ package com.urbanski.wordcounter
 
 import cats.effect.unsafe.implicits.global
 import com.urbanski.rawdataproducer.ListRawDataProducer
-import com.urbanski.rawdataproducer.config.EventHandlingConfig
 import com.urbanski.rawdataproducer.model.RawData
+import com.urbanski.wordcounter.config.AccumulationConfig
 import com.urbanski.wordcounter.model._
 import io.circe.syntax._
 import org.scalatest.matchers.should.Matchers._
@@ -25,7 +25,7 @@ class WordCounterSpec extends AnyWordSpec {
         Event(EventType("eventType1"), Data("data"), Timestamp(11000L))
       ).map(event => RawData(event.asJson.toString))
       val rawDataProducer = new ListRawDataProducer(events)
-      val config          = EventHandlingConfig(1000.millis, 2000.millis)
+      val config          = AccumulationConfig(1000.millis, 2000.millis)
       val wordCounter     = new WordCounter(rawDataProducer, config)
 
       val aggregatedAndCountedEvents = wordCounter.countWords().compile.toList.unsafeRunSync()
@@ -52,7 +52,7 @@ class WordCounterSpec extends AnyWordSpec {
         Event(EventType("eventType1"), Data("data"), Timestamp(11000L))
       ).map(event => RawData(event.asJson.toString))
       val rawDataProducer = new ListRawDataProducer(events)
-      val config          = EventHandlingConfig(15000.millis, 15000.millis)
+      val config          = AccumulationConfig(15000.millis, 15000.millis)
       val wordCounter     = new WordCounter(rawDataProducer, config)
 
       val aggregatedAndCountedEvents = wordCounter.countWords().compile.toList.unsafeRunSync()
@@ -76,7 +76,7 @@ class WordCounterSpec extends AnyWordSpec {
         Event(EventType("eventType1"), Data("data"), Timestamp(1001L)).asJson.toString
       ).map(RawData)
       val rawDataProducer = new ListRawDataProducer(events)
-      val config          = EventHandlingConfig(15000.millis, 15000.millis)
+      val config          = AccumulationConfig(15000.millis, 15000.millis)
       val wordCounter     = new WordCounter(rawDataProducer, config)
 
       val aggregatedAndCountedEvents = wordCounter.countWords().compile.toList.unsafeRunSync()
@@ -91,7 +91,7 @@ class WordCounterSpec extends AnyWordSpec {
     "produce empty list if there are no events" in {
       val events          = List.empty[RawData]
       val rawDataProducer = new ListRawDataProducer(events)
-      val config          = EventHandlingConfig(1000.millis, 2000.millis)
+      val config          = AccumulationConfig(1000.millis, 2000.millis)
       val wordCounter     = new WordCounter(rawDataProducer, config)
 
       val aggregatedAndCountedEvents = wordCounter.countWords().compile.toList.unsafeRunSync()
