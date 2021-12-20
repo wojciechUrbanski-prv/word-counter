@@ -16,7 +16,7 @@ import org.scalatest.EitherValues
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
 
-class ConsumeDataAndExposeDataFlow extends AnyWordSpec with EitherValues {
+class ConsumeDataAndExposeStatisticsFlow extends AnyWordSpec with EitherValues {
 
   "Application" should {
     "Consume streamed data, expose grouped and counted data via HTTP endpoint" in {
