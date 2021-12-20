@@ -13,8 +13,8 @@ import scala.concurrent.duration.DurationInt
 
 class WordCounterSpec extends AnyWordSpec {
 
-  "Counting words produced from event stream" should {
-    "reorganize events by their timestamp according to config values, group them by event types and count words for each window" in {
+  "Counting words produced from raw data stream" should {
+    "reorganize events by their timestamp (according to config values), group them by event types and count words for each window" in {
       val events = List(
         Event(EventType("eventType1"), Data("data"), Timestamp(1002L)),
         Event(EventType("eventType2"), Data("data"), Timestamp(2003L)),

@@ -1,10 +1,9 @@
 package com.urbanski.wordcounter.model
 
-import com.urbanski.wordcounter.model.{Data, Event, EventType, Timestamp}
-import org.scalatest.wordspec.AnyWordSpec
-import org.scalatest.EitherValues._
 import io.circe.parser._
+import org.scalatest.EitherValues._
 import org.scalatest.matchers.should.Matchers._
+import org.scalatest.wordspec.AnyWordSpec
 
 class EventJsonFormatTest extends AnyWordSpec {
 
